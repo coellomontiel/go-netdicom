@@ -2,13 +2,13 @@ package netdicom
 
 import (
 	"fmt"
-
 	"github.com/grailbio/go-dicom"
+
+	"github.com/coellomontiel/go-netdicom/dimse"
 	"github.com/grailbio/go-dicom/dicomio"
 	"github.com/grailbio/go-dicom/dicomlog"
 	"github.com/grailbio/go-dicom/dicomtag"
 	"github.com/grailbio/go-dicom/dicomuid"
-	"github.com/grailbio/go-netdicom/dimse"
 )
 
 // Helper function used by C-{STORE,GET,MOVE} to send a dataset using C-STORE

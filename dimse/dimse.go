@@ -12,11 +12,11 @@ import (
 	"fmt"
 	"sort"
 
+	"github.com/coellomontiel/go-netdicom/pdu"
 	dicom "github.com/grailbio/go-dicom"
 	"github.com/grailbio/go-dicom/dicomio"
 	"github.com/grailbio/go-dicom/dicomlog"
 	"github.com/grailbio/go-dicom/dicomtag"
-	"github.com/grailbio/go-netdicom/pdu"
 )
 
 // Message defines the common interface for all DIMSE message types.

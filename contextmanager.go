@@ -2,11 +2,11 @@ package netdicom
 
 import (
 	"fmt"
-
 	"github.com/grailbio/go-dicom"
+
+	"github.com/coellomontiel/go-netdicom/pdu"
 	"github.com/grailbio/go-dicom/dicomlog"
 	"github.com/grailbio/go-dicom/dicomuid"
-	"github.com/grailbio/go-netdicom/pdu"
 )
 
 type contextManagerEntry struct {
@@ -50,7 +50,7 @@ type contextManager struct {
 // Create an empty contextManager
 func newContextManager(label string) *contextManager {
 	c := &contextManager{
-		label: label,
+		label:                            label,
 		contextIDToAbstractSyntaxNameMap: make(map[byte]*contextManagerEntry),
 		abstractSyntaxNameToContextIDMap: make(map[string]*contextManagerEntry),
 		peerMaxPDUSize:                   16384, // The default value used by Osirix & pynetdicom.
@@ -90,9 +90,9 @@ func (m *contextManager) generateAssociateRequest(
 	items = append(items,
 		&pdu.UserInformationItem{
 			Items: []pdu.SubItem{
-				&pdu.UserInformationMaximumLengthItem{uint32(DefaultMaxPDUSize)},
-				&pdu.ImplementationClassUIDSubItem{dicom.GoDICOMImplementationClassUID},
-				&pdu.ImplementationVersionNameSubItem{dicom.GoDICOMImplementationVersionName}}})
+				&pdu.UserInformationMaximumLengthItem{MaximumLengthReceived: uint32(DefaultMaxPDUSize)},
+				&pdu.ImplementationClassUIDSubItem{Name: dicom.GoDICOMImplementationClassUID},
+				&pdu.ImplementationVersionNameSubItem{Name: dicom.GoDICOMImplementationVersionName}}})
 
 	return items
 }
