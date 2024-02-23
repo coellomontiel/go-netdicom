@@ -2,11 +2,13 @@ package netdicom
 
 import (
 	"fmt"
+
 	"github.com/grailbio/go-dicom"
 
-	"github.com/coellomontiel/go-netdicom/pdu"
 	"github.com/grailbio/go-dicom/dicomlog"
 	"github.com/grailbio/go-dicom/dicomuid"
+
+	"github.com/coellomontiel/go-netdicom/pdu"
 )
 
 type contextManagerEntry struct {
@@ -182,15 +184,15 @@ func (m *contextManager) onAssociateResponse(responses []pdu.SubItem) error {
 					if pickedTransferSyntaxUID == "" {
 						pickedTransferSyntaxUID = c.Name
 					} else {
-						return fmt.Errorf("Multiple syntax UIDs returned in A_ASSOCIATE_AC: %v", ri.String())
+						return fmt.Errorf("multiple syntax UIDs returned in A_ASSOCIATE_AC: %v", ri.String())
 					}
 				default:
-					return fmt.Errorf("Unknown subitem %s in PresentationContext: %s", subItem.String(), ri.String())
+					return fmt.Errorf("unknown subitem %s in PresentationContext: %s", subItem.String(), ri.String())
 				}
 			}
 			request, ok := m.tmpRequests[ri.ContextID]
 			if !ok {
-				return fmt.Errorf("Unknown context ID %d for A_ASSOCIATE_AC: %v",
+				return fmt.Errorf("unknown context ID %d for A_ASSOCIATE_AC: %v",
 					ri.ContextID,
 					ri.String())
 			}
